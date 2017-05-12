@@ -2,6 +2,7 @@
 
 QBLib is an SQL query construction library for Python. QBLib was developped to serve as a "no-bells-and-whistles" solution for developpers to dynamically build and integrate SQL queries within their code.
 
+
 ## Getting Started
 
 These instructions will get a copy of the project up and running on your local machine for development and testing purposes.
@@ -30,13 +31,14 @@ import QBLib
 
 For the purposes of our examples please consider the following table:
 
-city_table:
-ID  | 	CITY 	   |    STATE 	|    POPULATION          
-------------------------------------------------
+city_table
+
+ID      CITY          STATE        POPULATION
 12  |	Miami 	   |	FL 	|    430332 	  
 23  |	Houston    |	TX 	|    2240000 	  
 82  |	Chicago    |	IL 	|    2695598 	 
  	
+
 
 Build an SQL query to create a table using the creation_tools() class:
 
@@ -112,21 +114,26 @@ i.find_row(table_name, search_pattern, match_column, match_exact)
 
 For further details on the usage and applications of these classes/methods please refer to the documentation.
 
+
 ## Built With
 
 * [Python 2.7]
+
 
 ## Contributing
 
 Please read [CONTRIBUTING.md] for details on the code of conduct, and the process for submitting pull requests.
 
+
 ## Authors
 
 * **MK Rahal** - *Initial Development* - [mkrahal](https://github.com/mkrahal)
 
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
+
 
 ## Acknowledgments
 
