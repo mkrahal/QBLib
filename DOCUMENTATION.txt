@@ -1,0 +1,278 @@
+QBLib
+------
+
+QBLib is an SQL query construction library for Python. QBLib was developped to serve as a "no-bells-and-whistles" solution for developpers to dynamically build and integrate SQL queries within their code.
+
+
+1. GETTING STARTED
+-------------------
+
+These instructions will get a copy of the project up and running on your local machine for development and testing purposes.
+
+1a. Prerequisites
+
+The only dependency is Python 2.x
+
+1b. Installing
+
+Options to install the QBLib package:
+* Clone the repository: git clone https://github.com/mkrahal/QBLib  
+* Download the zip: https://github.com/mkrahal/QBLib
+
+
+2. USAGE
+----------
+
+Import QBLib into your python module.
+
+```
+import QBLib
+```
+
+
+3. CLASSES AND METHODS LISTING
+-------------------------------
+
+==> creation_tools()
+       |- create_table()
+       |- add_columns()
+       |- define_index_col()
+       |- define_primary_key()
+
+==> editing_tools()
+       |- insert_data()
+       |- import_csv()
+       |- export_csv()
+       |- delete_row()
+       |- delete_columns()
+
+==> processing_tools()
+       |- find_row()
+       |- find_in_col()
+       |- find_greater()
+       |- find_lesser()
+       |- table_join
+       |- count_records()
+       |- get_max()
+       |- get_min() 
+
+
+3. METHOD DETAILS
+-------------------
+
+# METHOD: create_table(tbl_name, cnd_dict)
+
+    Description
+    Method returns an SQL Query to create a table.   
+
+    Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    cnd_dict = A <dictionary> of columns and datatypes. In the form => {"col_name1": ['VARCHAR', 10], "col_name2": ['DECIMAL', 15, 2], "col_name3": ['INTEGER']}
+
+
+---
+
+# METHOD: add_columns(tbl_name, cnd_dict)
+
+    Description
+    Method returns an SQL Query to add columns to a table.   
+
+    Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    cnd_dict = A <dictionary> of columns and datatypes. In the form => {"col_name1": ['VARCHAR', 10], "col_name2": ['DECIMAL', 15, 2], "col_name3": ['INTEGER']}
+
+---
+
+# METHOD: define_index_col(tbl_name, col_name)
+
+  Description
+    Method returns an SQL Query to define an index column.   
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    col_name = A <string> representing the name of the targeted column.
+
+---
+
+# METHOD: define_primary_key(tbl_name, col_name)
+
+  Description
+    Method returns an SQL Query to add define a primary key column.   
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    col_name = A <string> representing the name of the targeted column.
+
+---
+
+# METHOD: insert_data(tbl_name, cnv_dict)
+
+  Description
+    Method returns an SQL Query to data into a table.   
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    cnv_dict = A <dictionary> of columns and their values (values can be passed as strings or any type of numerical datatype). 
+                 In the form => {"col_name1": "value1", "col_name2": 3, "col_name3": 10025.65874}
+
+---
+
+# METHOD: import_csv(csv_file_loc, tbl_name, columns_list, ignore_rows=0)
+
+  Description
+    Method returns an SQL Query to import data from a csv file into a table.   
+
+  Arguements
+    csv_file_loc = A <string> representing the location of the csv file. Ex '/home/user/filename.csv'
+    tbl_name = A <string> representing the name of the targeted table.
+    columns_list = A  <list> representing the columns of the targeted table to which the data will be imported.
+    ignore_rows = An <integer> representing the number of rows (from the top) to skip when importing (0 by default).
+
+---
+
+# METHOD: export_csv(csv_file_dest, tbl_name, columns_list="*", col_name=None, search_term=None)
+
+  Description
+    Method returns an SQL Query to export data from a table to a csv file. If used with the col_name and search_term arguements,
+     this method will return a "restrictive" SQL query which will only export records for which a specific search pattern is  
+     encountered in a pre-defined column.    
+
+  Arguements
+    csv_file_dest = A <string> representing the destination of the exported csv file. Ex '/home/user/filename.csv'
+    tbl_name = A <string> representing the name of the targeted table.
+    columns_list = A  <list> representing the columns of the targeted table from which the data will be exported 
+                      ('*' by default, denoting that ALL columns should be exported)
+    col_name = A <string> representing the column to be searched for a certain pattern. (None, by default)
+    search_term = A <string> representing the search pattern that will located in the "col_name" name column.
+
+---
+
+# METHOD: delete_row(tbl_name, search_term, match_col)
+
+  Description
+    Method returns a "restrictive" SQL query which will only delete rows for which a specific search pattern is encountered in 
+     a pre-defined column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    search_term = A <string> representing the search pattern that will located in the "col_name" name column.
+    match_col = A <string> representing the column to be searched for a certain pattern.
+
+---
+
+# METHOD: delete_columns(tbl_name, columns_list)
+
+  Description
+    Method returns an SQL query which will only delete the indicated columns from a given table.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    columns_list = A  <list> representing the targeted columns in the table.
+
+---
+
+# METHOD: find_row(tbl_name, search_term, match_col, matchexact=True)
+
+  Description
+    Method returns a "restrictive" SQL query which will only select values of rows for which a specific search pattern is encountered 
+     in a pre-defined column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    search_term = A <string> representing the search pattern that will located in the "col_name" name column.
+    match_col = A <string> representing the column to be searched for a certain pattern.
+    matchexact = A <boolean> representing the type pf search. If TRUE the method will search for exact matches if FALSE the method 
+                   will search for approximate matches (TRUE by default).
+
+---
+
+# METHOD: find_in_col(tbl_name, search_term, match_col, result_col, matchexact=True)
+
+  Description
+    Method returns a "restrictive" SQL query which will only select values from a specific column for which a specific search pattern 
+     is encountered in a pre-defined column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    search_term = A <string> representing the search pattern that will located in the "col_name" name column.
+    match_col = A <string> representing the column to be searched for a certain pattern.
+    result_col = A <string> or a <list> representing the columns from which the returned values should be fetched.
+    matchexact = A <boolean> representing the type pf search. If TRUE the method will search for exact matches if FALSE the method 
+                   will search for approximate matches (TRUE by default).
+
+---
+
+# METHOD: find_greater(tbl_name, match_col, compare_term, columns_list="*")
+
+  Description
+    Method returns a "restrictive" SQL query which will only select values from a specific column which are "greater" than a predefined  
+     value compared to values of a specific column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    match_col = A <string> representing the column to be searched for a certain pattern.
+    compare_term = A <string> representing the predefined value to which values from "match_col" will be compared.
+    columns_list = A <string> or <list> representing the columns of the targeted table from which the data that fulfill the
+                     "greater than" condition will be extracted ('*' by default, denoting that ALL columns should be extracted).
+
+---
+
+# METHOD: find_lesser(tbl_name, match_col, compare_term, columns_list="*")
+
+  Description
+    Method returns a "restrictive" SQL query which will only select values from a specific column which are "less" than a predefined  
+     value compared to values of a specific column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    match_col = A <string> representing the column to be searched for a certain pattern.
+    compare_term = A <string> representing the predefined value to which values from "match_col" will be compared.
+    columns_list = A <string> or <list> representing the columns of the targeted table from which the data that fulfill the
+                     "less than" condition will be extracted ('*' by default, denoting that ALL columns should be extracted).
+
+---
+
+# METHOD: table_join(table1_name, table2_name, common_col)
+
+  Description
+    Method returns a "join" SQL query which will merge two tables based on the values of a common column.       
+
+  Arguements
+    table1_name = A <string> representing the name of the first targeted table.
+    table2_name = A <string> representing the name of the second targeted table.
+    common_col = A <string> representing the shared column which will be used to map the merging operation.
+
+---
+
+# METHOD: count_records(tbl_name, col_name="*")
+
+  Description
+    Method returns an SQL query which will count the number of records in a given column or in a table.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    col_name = A <string> representing the column of the targeted table in which the records will be counted 
+                 ('*' by default, denoting that ALL records in the entire table should be counted).
+
+---
+
+# METHOD: get_max(tbl_name, col_name)
+
+  Description
+    Method returns an SQL query which selects the highest value in a given column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    col_name = A <string> representing the targeted column.
+
+---
+
+# METHOD: get_min(tbl_name, col_name)
+
+  Description
+    Method returns an SQL query which selects the lowest value in a given column.       
+
+  Arguements
+    tbl_name = A <string> representing the name of the affected table.
+    col_name = A <string> representing the targeted column.
+
