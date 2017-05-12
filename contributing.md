@@ -4,7 +4,7 @@
 
 * Before sending a pull request for a feature or bug fix run QBLibTester.py against your additions/modifications. 
 
-* Use the same coding style as the rest of the [codebase](https://github.com/mk-rahal/QBLib).
+* Use the same coding style as the rest of the [codebase](https://github.com/mkrahal/QBLib).
 
 * All pull requests should be made to the `master` branch.
 
