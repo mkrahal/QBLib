@@ -29,17 +29,6 @@ import QBLib
 
 ### Building SQL Queries
 
-For the purposes of our examples please consider the following table:
-
-city_table
-
-ID      CITY          STATE        POPULATION
-12  |	Miami 	   |	FL 	|    430332 	  
-23  |	Houston    |	TX 	|    2240000 	  
-82  |	Chicago    |	IL 	|    2695598 	 
- 	
-
-
 Build an SQL query to create a table using the creation_tools() class:
 
 ```
@@ -117,12 +106,12 @@ For further details on the usage and applications of these classes/methods pleas
 
 ## Built With
 
-* [Python 2.7]
+* Python 2.7
 
 
 ## Contributing
 
-Please read [CONTRIBUTING.md] for details on the code of conduct, and the process for submitting pull requests.
+Please read [CONTRIBUTING.md](contributing.md) for details on the code of conduct, and the process for submitting pull requests.
 
 
 ## Authors
@@ -132,7 +121,7 @@ Please read [CONTRIBUTING.md] for details on the code of conduct, and the proces
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](license.txt) file for details
 
 
 ## Acknowledgments
