@@ -204,7 +204,7 @@ class editing_tools():
         elif (col_name and search_term) is None:
             sql_query = sqv_pt1 + sqs_pt1 + sqs_pt2
         else:
-            print "Missing arguement(s), Please check your method call."
+            print "Missing arguement(s), please check your method call."
 
         return sql_query
 
