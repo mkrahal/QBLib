@@ -6,7 +6,7 @@
 #                                                                          #
 #                                                                          #
 #  MIT License                                                             #
-#  Copyright 2017 MK Rahal                                               #
+#  Copyright 2017 MK Rahal                                                 #
 #                                                                          #
 #  Permission is hereby granted, free of charge, to any person             #
 #  obtaining a copy of this software and associated documentation          #
@@ -223,9 +223,14 @@ class editing_tools():
         return sql_query
 
 
-class processing_tools():
+class operational_tools():
 
-     def check_exists(self, tbl_name, search_term, match_col, matchexact=True):
+    def check_table_exists(self, tbl_name):
+        sql_query = "SELECT * FROM information_schema.tables WHERE table_name = %s" % \
+                    (tbl_name)
+        return sql_query
+
+    def check_val_exists_in_table(self, tbl_name, search_term, match_col, matchexact=True):
         if matchexact is True:
             sql_query =  "select count(1) from %s where %s = %s" % \
                         (str(tbl_name), str(match_col), str(search_term))
