@@ -226,7 +226,7 @@ class editing_tools():
 class operational_tools():
 
     def check_table_exists(self, tbl_name):
-        sql_query = "SELECT * FROM information_schema.tables WHERE table_name = %s" % \
+        sql_query = "SELECT * FROM information_schema.tables WHERE table_name = '%s'" % \
                     (tbl_name)
         return sql_query
 
