@@ -6,7 +6,7 @@
 #                                                                          #
 #                                                                          #
 #  MIT License                                                             #
-#  Copyright © 2017 MK Rahal                                               #
+#  Copyright 2017 MK Rahal                                               #
 #                                                                          #
 #  Permission is hereby granted, free of charge, to any person             #
 #  obtaining a copy of this software and associated documentation          #
@@ -225,6 +225,17 @@ class editing_tools():
 
 class processing_tools():
 
+     def check_exists(self, tbl_name, search_term, match_col, matchexact=True):
+        if matchexact is True:
+            sql_query =  "select count(1) from %s where %s = %s" % \
+                        (str(tbl_name), str(match_col), str(search_term))
+        else:
+            sql_query = "select count(1) from %s where %s LIKE \%%s\%" % \
+                        (str(tbl_name), str(match_col), str(search_term))
+        return sql_query
+
+
+    
     def find_row(self, tbl_name, search_term, match_col, matchexact=True):
         if matchexact is True:
             sql_query = "SELECT * FROM %s WHERE %s = %s" % \
