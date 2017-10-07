@@ -53,17 +53,17 @@ class creation_tools(string_constants):
         for colname_key in cnd_dict.keys():
             count += 1
             sqv_pt1 = "%s " % (colname_key)
-            columns_list.append(sqv_pt1)
+            #columns_list.append(sqv_pt1)
 
             if len(cnd_dict[colname_key]) == 1 and cnd_dict[colname_key][0].lower(
             ) in string_constants.no_size_dt:
                 sqv_pt2 = "%s" % (cnd_dict[colname_key][0].upper())
-                columns_list.append(sqv_pt2)
+                columns_list.append(sqv_pt1 + sqv_pt2)
 
             elif len(cnd_dict[colname_key]) == 2:
                 sqv_pt2 = "%s(%s)" % (
                     cnd_dict[colname_key][0].upper(), str(cnd_dict[colname_key][1]))
-                columns_list.append(sqv_pt2)
+                columns_list.append(sqv_pt1 + sqv_pt2)
 
             elif len(cnd_dict[colname_key]) == 3 and \
                     cnd_dict[colname_key][0].lower() == ("DECIMAL".lower() or "NUMERIC".lower()):
@@ -71,7 +71,7 @@ class creation_tools(string_constants):
                 sqv_pt2 = "%s(%s, %s)" % (cnd_dict[colname_key][0].upper(), str(
                     cnd_dict[colname_key][1]), str(cnd_dict[colname_key][2]))
 
-                columns_list.append(sqv_pt2)
+                columns_list.append(sqv_pt1 + sqv_pt2)
 
             else:
                 print "wrong datatype or wrong number of arguements please check syntax"
@@ -152,7 +152,12 @@ class editing_tools():
         for colname_key in columns_list:
             if colname_key != ', ':
                 count += 1
-                sqv_pt2 = "%s" % (str(cnv_dict[colname_key]))
+                if type(cnv_dict[colname_key]) is str \
+                   or type(cnv_dict[colname_key]) is bool \
+                   or type(cnv_dict[colname_key]) is unicode:
+                    sqv_pt2 = "'%s'" % (str(cnv_dict[colname_key]))
+                else:
+                    sqv_pt2 = "%s" % (str(cnv_dict[colname_key]))
                 values_list.append(sqv_pt2)
 
         columns_string = ", ".join(columns_list)
